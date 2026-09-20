@@ -10,16 +10,22 @@ USER appuser
 EXPOSE 9000
 CMD ["node","dist/server.js"]
 
-#multi stage
+#Let us add the multi stage also 
 
-node run build - package.json, dist/
+FROM node:20-slim as builder
+WORKDIR /build
+COPY package*.json ./
+RUN npm ci
+COPY . . 
+RUN npm run build
 
-FROM node:20-slim
+#stage 2
+FROM node:20-slim 
 RUN useradd -r appuser
-WORKDIR /app
-COPY --chown=appuser:appuser package*.json ./
+COPY --from=builder chown=appuser:appuser /build/package*.json  ./
 RUN npm ci --omit=dev
-COPY --chown=appuser:appuser dist ./dist
+COPY --from-builder --chown=appuser:appuser dist ./dist
 USER appuser
 EXPOSE 9000
 CMD ["node","dist/server.js"]
+
