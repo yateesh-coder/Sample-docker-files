@@ -10,13 +10,17 @@ CMD ["java","-jar","app.jar"]
 
 
 #for a multi stage file
+FROM maven:3.9-eclipse-temurin-17 as builder
+WORKDIR /build
+COPY pom.xml ./
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-  mvn clean package - target/app.jar
-
-FROM eclipse-temurin:17-jre
+#stage 2
+FROM eclipse-temurin:17-jre 
 RUN useradd -r appuser
 WORKDIR /app
-COPY --chown=appuser:appuser target/app.jar ./app.jar
+COPY --from=builder --chown=appuser:appuser /build/target/app.jar ./app.jar
 USER appuser
 EXPOSE 8080
 CMD ["java","-jar","app.jar"]
