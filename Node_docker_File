@@ -22,9 +22,9 @@ RUN npm run build
 #stage 2
 FROM node:20-slim 
 RUN useradd -r appuser
-COPY --from=builder chown=appuser:appuser /build/package*.json  ./
+COPY --from=builder --chown=appuser:appuser /build/package*.json  ./
 RUN npm ci --omit=dev
-COPY --from-builder --chown=appuser:appuser dist ./dist
+COPY --from=builder --chown=appuser:appuser dist ./dist
 USER appuser
 EXPOSE 9000
 CMD ["node","dist/server.js"]
