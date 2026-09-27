@@ -26,3 +26,13 @@ Java Application
 Java Library API
       ↓
 Library function
+
+
+| Method     | Typical purpose  |
+| ---------- | ---------------- |
+| **GET**    | Retrieve data    |
+| **POST**   | Create/send data |
+| **PUT**    | Replace/update   |
+| **PATCH**  | Partially update |
+| **DELETE** | Delete           |
+
