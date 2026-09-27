@@ -1,0 +1,28 @@
+API = Application Programming Interface
+
+An API is a defined interface/contract that allows one software application or service to interact with another.
+
+Application A
+      ↓
+     API
+      ↓
+Application B
+
+The API defines how the interaction should happen and what kind of request/response is expected.
+
+Web API:
+Uses a network protocol such as HTTP/HTTPS.
+GET https://api.example.com/users/123
+
+Non-web API:
+
+Doesn't use HTTP/HTTPS. It can be an interface provided by:
+Programming libraries
+Operating systems
+SDKs
+example:
+Java Application
+      ↓
+Java Library API
+      ↓
+Library function
