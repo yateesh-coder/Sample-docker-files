@@ -36,3 +36,17 @@ Library function
 | **PATCH**  | Partially update |
 | **DELETE** | Delete           |
 
+
+                 APPLICATION
+                     │
+       ┌─────────────┼─────────────┐
+       ↓             ↓             ↓
+     EC2            EKS          Lambda
+   (server)        (pods)      (serverless)
+       │             │             │
+       ↓             ↓             ↓
+      ALB       ALB + Ingress   API Gateway
+       │             │             │
+       ↓             ↓             ↓
+     RDS           RDS         DynamoDB
+
