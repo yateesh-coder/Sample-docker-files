@@ -1,0 +1,1 @@
+This repo is to store some docker file templates for reference for usage in devops projects and self hosted project.
